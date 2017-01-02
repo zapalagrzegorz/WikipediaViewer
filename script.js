@@ -11,35 +11,47 @@ $().ready(function () {
       var instance;
       
       function createInstance() {
-          var object = { 
+          var object = {
+            results : [0], 
             // app makes request
-            getData : function () {
+            getData : function() {
               // $ get search data from form
+              var self = this;
+              console.log('GetData - this: ' + this);
               var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srsearch=metal&srlimit=50&titles=metal&origin=*";
               $.getJSON(url, function (data) {
-                console.log(data);
-                object.setResults(data);
+                // console.log(data);
+                console.log('getJSON - self: ' + self);
+                object.setResults(data, self);
+                object.showData();
               });
             },
-            setResults : function (data){
-              var results = [];
+            setResults : function (data, self){
+              // var self = this;
+              // var results = [];
               // get all of the results
-              search.forEach(function(element) {
+              data.query.search.forEach(function(element) {
                 var obj = {};
                 obj.title = element.title;
                 obj.snippet = element.snippet;
-                results.push(obj);
-              }, this);
-               
-              console.log('data.query.search.length: ' + data.query.search.length);
+                self.results.push(obj);
+              }, this); 
+            
+              console.log('this: ' + this);
+              console.log('self: ' + self)
+              // console.log('data.query.search.length: ' + data.query.search.length);
               var pagesNum = data.query.search.length/10;
-
               
               // handle data 
               // liczba danych 
             },
             getRadomData : function (){
                // $ get search data from form
+            },
+            showData : function () {
+              this.results.forEach ( function(item) {
+                console.log('value title: ' + item.title + ' ' + item.snippet);
+              });
             }
           }
           return object;
@@ -62,6 +74,7 @@ $().ready(function () {
       var engine = wikiSearchEngine.getInstance();
       // przypis przyciskowi random funckje engine.
       engine.getData();
+      // engine.showData();
   }
 });
 
