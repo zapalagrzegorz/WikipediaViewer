@@ -13,23 +13,23 @@ $().ready(function () {
       function createInstance() {
           var object = {
             results : [0], 
+            self : this,
             // app makes request
             getData : function() {
-              // $ get search data from form
-              var self = this;
-              console.log('GetData - this: ' + this);
+
+              console.log('GetData - this: ' + self);
               var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srsearch=metal&srlimit=50&titles=metal&origin=*";
               $.getJSON(url, function (data) {
-                // console.log(data);
-                console.log('getJSON - self: ' + self);
-                object.setResults(data, self);
-                object.showData();
+                
+                // checkpoint console.log(data);
+                console.log('getJSON - self: ' + self.results);
+                
+                // 
+                object.setResults(data);
               });
             },
-            setResults : function (data, self){
-              // var self = this;
-              // var results = [];
-              // get all of the results
+            setResults : function (data){
+              var self = this;
               data.query.search.forEach(function(element) {
                 var obj = {};
                 obj.title = element.title;
@@ -39,15 +39,14 @@ $().ready(function () {
             
               console.log('this: ' + this);
               console.log('self: ' + self)
-              // console.log('data.query.search.length: ' + data.query.search.length);
               var pagesNum = data.query.search.length/10;
-              
-              // handle data 
-              // liczba danych 
             },
+
+            // Random button
             getRadomData : function (){
-               // $ get search data from form
             },
+
+            // wyświetl dane
             showData : function () {
               this.results.forEach ( function(item) {
                 console.log('value title: ' + item.title + ' ' + item.snippet);
@@ -74,7 +73,8 @@ $().ready(function () {
       var engine = wikiSearchEngine.getInstance();
       // przypis przyciskowi random funckje engine.
       engine.getData();
-      // engine.showData();
+
+      engine.showData();
   }
 });
 
