@@ -21,8 +21,8 @@ $().ready(function () {
               var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srsearch=metal&srlimit=50&titles=metal&origin=*";
               $.getJSON(url, function (data) {
                 
-                // checkpoint console.log(data);
-                console.log('getJSON - self: ' + self.results);
+                console.log(data);
+                // console.log('getJSON - self: ' + self.results);
                 
                 // 
                 object.setResults(data);
