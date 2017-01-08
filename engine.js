@@ -1,12 +1,16 @@
+
 var engine = {
     dataJSON: [],
-
+    currentPage : 0,
+    self : this,
     // app makes request to WIKI API
-    getData: function () {
+    getData: function (event) {
         var self = this;
-        var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srsearch=metal&srlimit=50&titles=metal&&formatversion=2&origin=*";
+        console.log(self);
+        var search = $( "#wiki-search" ).val();
+        var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srlimit=50&formatversion=2&origin=*&srsearch=" + search;
         $.getJSON(url, function (data) {
-            // console.log(data);
+            console.log(data);
             var length = data.query.search.length;
             for (var i = 0; i < length; i++) {
                 if (i % 10 === 0) {
@@ -31,13 +35,31 @@ var engine = {
 
     // presents data on page
     showData: function () {
-
+        // var self = this;
+        console.log(self);
         setPagination();
 
-        $('a.page-link').click(function () {
+        $('a.page-link').click(function (event) {
+            event.preventDefault();
+            // console.log(cP);
             var pageNum = $(this).data('pagenum');
-            setPage(pageNum);
+            if(pageNum === -1 && (self.currentPage-1) >= 0){
+                setPage(self.currentPage-1);
+            }
+            else if (pageNum > 0) {
+                setPage(pageNum);
+            }
+            else{
+                return false;
+            }
+
         });
+        // $('a.previousPage').click(function(event){
+        //     event.preventDefault();
+        //     if((this.currentPage-1) < 0){
+        //         return false
+        //     }
+        // });
 
         setPage(0);
 
@@ -46,7 +68,7 @@ var engine = {
             var navigation = '<nav aria-label="Page navigation">' +
                 '<ul class="pagination">' +
                 '<li class="page-item">' +
-                '<a class="page-link" href="#" aria-label="Previous">' +
+                '<a class="page-link previousPage" href="#" aria-label="Previous" data-pagenum="-1">' +
                 '<span aria-hidden="true">&laquo;</span>' +
                 '<span class="sr-only">Previous</span>' +
                 '</a>' +
@@ -63,14 +85,15 @@ var engine = {
             '</li>'
             '</ul>'
             '</nav>';
+            
             $('.nav').html(navigation);
         }
-
         // sets results
-        function setPage(num) {
+        function setPage(pageNum) {
+            this.currentPage = pageNum;
             $('#results').html('');
-            engine.dataJSON[num].forEach(function (item) {
-                result = $('<div class="wiki-results default-primary-color">').html('<a class="text-primary-color" href="https://en.wikipedia.org/wiki/' + item.title + '"><div class="wiki-header"><h2>' + item.title + '</h2></a></div><p class="wiki-extract">' + item.snippet + '</p>')
+            engine.dataJSON[pageNum].forEach(function (item) {
+                var result = $('<div class="wiki-results default-primary-color">').html('<a class="text-primary-color" href="https://en.wikipedia.org/wiki/' + item.title + '"><div class="wiki-header"><h2>' + item.title + '</h2></a></div><p class="wiki-extract">' + item.snippet + '</p>')
                 $('#results').append(result);
             });
         }
