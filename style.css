@@ -10,6 +10,26 @@
 .divider-color         { border-color: #BDBDBD; }
 
 
+input[type=search] {
+    border-color: #fff;
+}
+.center {
+    margin: 0 auto;
+}
+.header {
+    text-align: center;
+    padding-top: 2rem;
+}
+.search {
+        padding: 2rem 0;
+}
+.nav {
+    padding: 2rem 0;
+}
+.page-link {
+    background-color: #00796B;
+    color: #B2DFDB;;
+}
 #results a:hover {
     color: #FFF;
     text-decoration: none;

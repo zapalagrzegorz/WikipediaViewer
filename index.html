@@ -5,18 +5,30 @@
     <title>Wikipedia Viewer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="dark-primary-color">
-    <main >
+    <main>
         <section class="container">
-            <button id="show">show</button>
-            <div class="nav"></div>
-            <div id="results"></div>
-            <div class="nav"></div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6">
+                    <h1 class="header text-primary-color">FCC Wikipedia viewer</h1>
+                    <div class="col-12 col-sm-12d col-md-10 col-lg-9 col-xl-9 center search">
+                        <div class="input-group ">
+                            <input type="search" class="form-control" name="wiki-search" id="wiki-search" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" id="wiki-search-button" type="button">Wiki it!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav row justify-content-center"></div>
+            <div id="results" class="row"></div>
+            <div class="nav row justify-content-center"></div>
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
