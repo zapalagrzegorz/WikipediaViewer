@@ -10,6 +10,13 @@
 .divider-color         { border-color: #BDBDBD; }
 
 
+.onlySm {
+    display: none;
+}
+.notSm {
+     display: initial;
+}
+
 input[type=search] {
     border-color: #fff;
 }
@@ -43,13 +50,14 @@ input[type=search] {
 
 .wiki-header {
     padding: 10px 0 10px 50px;
+    margin-left: -30px;
     width: 45%;
     margin-bottom: 10px;
-    background-color: #9575CD;
+    background-color: #00796B;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.wiki-header:hover, .wiki-header:focus, .wiki-header:active  {
+.wiki-results:hover .wiki-header, .wiki-header:focus, .wiki-header:active  {
     background-color: #7C4DFF;
     box-shadow: 0 6px 9px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -60,3 +68,14 @@ input[type=search] {
     color: #CFD8DC;
 }
 
+@media screen and (max-width: 576px) {
+    .onlySm {
+        display: initial;
+    }
+    .notSm {
+        display: none;
+    }
+    .input-group-btn>.btn {
+        margin: 20px 0;
+    }
+}
