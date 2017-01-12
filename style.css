@@ -25,7 +25,7 @@ input[type=search] {
 }
 .header {
     text-align: center;
-    padding-top: 2rem;
+    padding: 2rem 0 2rem;
 }
 .search {
         padding: 2rem 0;
@@ -66,6 +66,17 @@ input[type=search] {
 }
 .wiki-extract {
     color: #CFD8DC;
+}
+.input-group {
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.input-group:hover {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.16),0 0 0 2px rgba(0,0,0,0.08);
+}
+#wiki-search-random, wiki-search-button {
+    margin: 0;
 }
 
 @media screen and (max-width: 576px) {
