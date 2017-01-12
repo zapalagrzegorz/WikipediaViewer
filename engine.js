@@ -5,9 +5,13 @@ var engine = {
 	self: this,
 	// app makes request to WIKI API
 	getData: function (event) {
+		this.dataJSON = [];
 		var self = this;
 		// pick value from input form
 		var search = $("#wiki-search").val();
+		if(search == ''){
+
+		}
 		var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srlimit=50&formatversion=2&origin=*&srsearch=" + search;
 		$.getJSON(url, function (data) {
 			var length = data.query.search.length;
