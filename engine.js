@@ -121,7 +121,7 @@ var engine = {
 			this.currentPage = pageNum;
 			$('#results').html('');
 			engine.dataJSON[pageNum].forEach(function (item) {
-				var result = $('<div class="wiki-results default-primary-color">').html('<a class="text-primary-color" href="https://en.wikipedia.org/wiki/' + item.title + '" target="_blank"><div class="wiki-header"><h2>' + item.title + '</h2></a></div><p class="wiki-extract">' + item.snippet + '</p>')
+				var result = $('<div class="wiki-results default-primary-color">').html('<a class="text-primary-color" href="https://en.wikipedia.org/wiki/' + item.title + '" target="_blank"><div class="wiki-header"><h2>' + item.title + '</h2></a></div><p class="wiki-extract">' + item.snippet + '...' + '</p>');
 				$('#results').append(result);
 			});
 		}
