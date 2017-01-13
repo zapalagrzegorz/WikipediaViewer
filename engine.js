@@ -3,23 +3,32 @@ var engine = {
 	dataJSON: [],
 	currentPage: 0,
 	self: this,
+	
 	// app makes request to WIKI API
 	getData: function (event) {
-		this.dataJSON = [];
 		var self = this;
+		
 		// pick value from input form
 		var search = $("#wiki-search").val();
-		if(search == ''){
-
+		
+		// clear page data if no entry is given
+		if(search === ''){
+			self.dataJSON = [];
+			self.clear();
+			return;
 		}
 		var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srlimit=50&formatversion=2&origin=*&srsearch=" + search;
+		
+		// jQuery call to WIKI API
 		$.getJSON(url, function (data) {
+			self.dataJSON = [];
 			var length = data.query.search.length;
 			for (var i = 0; i < length; i++) {
 				if (i % 10 === 0) {
 					var arr = [];
 				}
-				var obj = {}; // bez tego mamy tylko jeden obiekt
+				// bez tego mamy tylko jeden obiekt
+				var obj = {}; 
 				obj.title = data.query.search[i].title;
 				obj.snippet = data.query.search[i].snippet;
 				arr.push(obj);
@@ -28,12 +37,32 @@ var engine = {
 				}
 			}
 			self.showData();
-		});
-
-	},
+		})
+			.fail(function() {
+    			console.log( "error" );
+  			});
+		},
 
 	// Random button
-	getRadomData: function () {
+	getRandomData: function () {
+		var self = this;
+		var url = "http://en.wikipedia.org/w/api.php?action=query&list=random&format=json&rnnamespace=0&origin=*";
+		$.getJSON(url, function (data) {
+			console.log(data);
+			console.log('random');
+			self.dataJSON = [];
+			var length = 1;
+			var arr = [];
+			var obj = {};
+			obj.title = data.query.random[0].title;
+			obj.snippet = "Random wiki title";
+			arr.push(obj);
+			self.dataJSON.push(arr);
+			self.showData();
+		})
+			.fail(function() {
+    			console.log( "error" );
+  			});
 	},
 
 	// presents data on page
@@ -96,5 +125,11 @@ var engine = {
 				$('#results').append(result);
 			});
 		}
+	},
+	// clears page
+	clear: function(){
+		$('.nav').html('');
+		$('#results').html('');
 	}
+
 }
