@@ -17,7 +17,7 @@ var engine = {
       return;
     }
     var url =
-      "http://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srlimit=50&formatversion=2&origin=*&srsearch=" +
+      "https://en.wikipedia.org/w/api.php?format=json&action=query&prop&list=search&srlimit=50&formatversion=2&origin=*&srsearch=" +
       search;
 
     // jQuery call to WIKI API
